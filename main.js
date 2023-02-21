@@ -2,10 +2,12 @@ const ITEMS_CONTAINER = document.getElementById("items");
 const ITEM_TEMPLATE = document.getElementById("itemTemplate");
 const ADD_BUTTON = document.getElementById("add");
 
-function getItems() {
-  const value = localStorage.getItem("todo");
+let items = getItems();
 
-  console.log(value);
+function getItems() {
+  const value = localStorage.getItem("todo-test") || "[]";
+
+  return JSON.parse(value);
 }
 
-getItems();
+console.log(items);
