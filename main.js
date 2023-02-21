@@ -1,0 +1,1 @@
+const ITEMS_CONTAINER = document.getElementById("items");
