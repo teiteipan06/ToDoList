@@ -26,8 +26,24 @@ function addItem() {
   refreshList();
 }
 
+function updateItem(item, key, value) {
+  item[key] = value;
+  setItems(items);
+  refreshList();
+}
+
 function refreshList() {
-  //TODO: sort items
+  items.sort((a, b) => {
+    if (a.completed) {
+      return 1;
+    }
+
+    if (b.completed) {
+      return -1;
+    }
+
+    return a.description < b.description ? -1 : 1;
+  });
 
   ITEMS_CONTAINER.innerHTML = "";
 
@@ -37,7 +53,15 @@ function refreshList() {
     const completedInput = itemElement.querySelector(".item-completed");
 
     descriptionInput.value = item.description;
-    descriptionInput.checked = item.completed;
+    completedInput.checked = item.completed;
+
+    descriptionInput.addEventListener("change", () => {
+      updateItem(item, "description", descriptionInput.value);
+    });
+
+    completedInput.addEventListener("change", () => {
+      updateItem(item, "completed", completedInput.checked);
+    });
 
     ITEMS_CONTAINER.append(itemElement);
   }
