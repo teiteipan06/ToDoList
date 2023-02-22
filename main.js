@@ -33,8 +33,15 @@ function refreshList() {
 
   for (const item of items) {
     const itemElement = ITEM_TEMPLATE.content.cloneNode(true);
+    const descriptionInput = itemElement.querySelector(".item-description");
+    const completedInput = itemElement.querySelector(".item-completed");
+
+    descriptionInput.value = item.description;
+    descriptionInput.checked = item.completed;
+
+    ITEMS_CONTAINER.append(itemElement);
   }
 }
 
 
-console.log(items);
+refreshList();
